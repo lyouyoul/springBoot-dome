@@ -1,0 +1,65 @@
+server:
+  port: 8088
+  servlet:
+    ##地址必须.do结尾
+    #path: "*.do"
+    ##地址8088后必须接dome
+    context-path: "/dome"
+logging:
+  level:
+    cn.itcast: debug
+    #org.springframwork: debug
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dome?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Hongkong
+    username: root
+    password: 121315
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 600000
+      pool-name: DatebookHikariCP
+      max-lifetime: 28740000
+      connection-test-query: SELECT 1
+
+  redis:
+    host: 192.168.0.107
+    port: 6379
+    password:
+
+mybatis:
+  type-aliases-package: cn.itcast.pojo
+#  configuration:
+#    驼峰。通用mapper会自动开启
+#    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    ##开启延时加载 测试136条数据速度比不上 join##
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    ######开启二级缓存(延时加载)总开关######
+    cache-enabled: true
+
+####通用mapper配置####
+mapper:
+  not-empty: false
+  identity: MYSQL
+  mappers: cn.itcast.utils.MyMapper
+
+####分页插件####
+pagehelper:
+# #方言
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
+
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.mapeer.ProcuceMapper">
+    <resultMap id="result" type="cn.itcast.pojo.Produce">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="pro_name" property="proName"/>
+        <result column="score" property="score"/>
+    </resultMap>
+    <select id="findProduceById" resultMap="result" parameterType="java.lang.Integer">
+        select * from produce where user_id=#{id}
+    </select>
+
+</mapper>
